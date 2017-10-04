@@ -1,0 +1,78 @@
+.header{
+	height : 55px;
+	background-color: #222535;
+	border-bottom: 1px solid white;
+}
+
+.toggle{
+	display: inline-block;
+	width : 20%;
+	height : 100%;
+}
+
+.profile-pic{
+    top:15px;
+    height:130px;
+    width:130px;
+    border-radius: 100%;
+    margin:auto 0;
+
+}
+
+.left-toggle{
+	left : 17px;
+	top:15px;
+	color:white;
+	font-size: 20px;
+	transition: margin-left 0.5s;
+}
+
+.right-toggle{
+	right: 17px;
+	float:right; 
+	top:15px;
+	display: none;
+	color:white;
+	font-size: 20px;
+}
+
+.sidenav {
+	margin-top:55px;
+    bottom:0;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #222535;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+    height:100%;
+}

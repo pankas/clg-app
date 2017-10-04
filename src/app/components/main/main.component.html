@@ -1,0 +1,29 @@
+<div class="main">
+    <div class="header">
+		<span *ngIf="!mobiletrue" id="left" class="left-toggle glyphicon glyphicon-menu-hamburger" #tg (click)="toggle(tg)" ></span>
+		<span *ngIf="mobiletrue" id="left" class="left-toggle glyphicon glyphicon-menu-hamburger" #tg (click)="toggleMobile(tg)" ></span>
+    		<!-- <span id="right" class="right-toggle glyphicon glyphicon-menu-hamburger" (click)="toggle('right','left')"></span> -->
+		<span *ngIf="!mobiletrue" style="color:white;font-size:25px;margin-left:20px;top:15px;" >Ch. Brahm Prakash Govt. Engg. College</span>
+		<span *ngIf="mobiletrue && !togglebtn" style="color:white;font-size:25px;margin-left:20px;top:15px;" ></span>
+	</div>
+    <div id="mySidenav" (click)="toggleMobileclose()" class="sidenav">
+		<div style="text-align:center">
+			<img class="profile-pic" src="/assets/profile.png" alt="Profile-Pic">
+			<h2 style="color:white;margin-bottom:0">Username</h2>
+			<p style="color:white">username@email.com</p>
+		</div>  
+		<a style="color:white;" >Profile</a>
+		<a style="color:white;" >Result</a>
+		  <a style="color:white;" >Library</a>
+		  <a style="color:white;" >Form Details</a>
+	</div>
+	<div id="main" (click)="toggleMobileclose()">
+  		<h2>College App</h2>
+  		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+  		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	</div>
+</div>
