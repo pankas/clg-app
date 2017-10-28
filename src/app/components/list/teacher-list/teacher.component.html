@@ -1,0 +1,65 @@
+<div>
+    <br>
+    <ul class="list-group">
+        <li class="list-group-item" style="padding:15px" *ngFor="let teacher of teachers">
+            <div (click)="openStudent(teacher)" style="width:10%;display:inline-block">
+                <img style="height:100px;width:100px;border:1px solid black;border-radius:5px;"src="/assets/profile.png" alt="">                    
+            </div>
+            <div (click)="openStudent(teacher)" style="width:40%;display:inline-block;margin-left:5px;">
+                    <span>UserName : {{teacher.teacherId}}</span><br>
+                    <span>Name : {{teacher.teacherName}}</span> <br>
+                    <span>Phone No : {{teacher.phoneNumber}}</span>
+            </div>
+
+            <div *ngIf="isAdmin" style="width:10%;display:inline-block;color:red" >
+                <span (click)="deleteTea(teacher.teacherId)" class="glyphicon glyphicon-trash"></span>    
+            </div>
+                
+        </li>
+    </ul>
+
+    <span *ngIf="isMore" class="glyphicon glyphicon-chevron-down" (click)="more()"></span>
+</div>
+
+<div class="modal fade" id="teacherDetail" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Teacher Detail</h4>
+        </div>
+        <div class="modal-body">
+            <div style="width:30%;display:inline-block">
+                <img src="/assets/profile.png" style="height:150px;width:150px;border:1px solid black;border-radius:5px;" alt="">
+            </div>
+            <div style="width:60%;height:150px;display:inline-block">
+                <span>Enrollment No : {{selectedTeacher.teacherId}}</span><br>
+                <span>Name : {{selectedTeacher.teacherName}}</span><br>
+                <span>Phone No : {{selectedTeacher.phoneNumber}}</span><br>
+                <span>Semester : {{selectedTeacher.semester}}</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <div class="modal fade" id="delete" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Message</h4>
+        </div>
+        <div class="modal-body">
+            Sure, Want delete
+        </div>
+        <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="sure()" data-dismiss="modal">sure</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->

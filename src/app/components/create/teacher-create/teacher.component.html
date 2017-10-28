@@ -1,0 +1,12 @@
+<div style="padding:10px">
+        <form (ngSubmit)="onSubmit(val)" #val="ngForm" >
+            <label for="enr">UserName</label>
+            <input class="form-control" type="text" name="teacherId" ngModel>
+            <label  for="name">Name</label>
+            <input class="form-control" type="text" name="teacherName" ngModel>
+            <label for="email">Phone Number</label>
+            <input type="number" class="form-control" name="phoneNumber" ngModel>
+            <br>
+            <input type="submit" class="btn btn-primary">
+        </form>
+    </div>

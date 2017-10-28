@@ -1,0 +1,20 @@
+<div>
+        <div style="color:white;border-radius:3px;background-color:black;padding:4px;" > Feedbacks >> </div>
+    <br>
+    
+        <ul style="padding:10px;" class="list-group">
+        <li *ngFor="let feedback of feedbacks" class="list-group-item">
+            <b> {{feedback.heading}}</b><br>
+            <br>
+            {{feedback.message}}
+            <br>
+            <span>
+                - from 
+                {{feedback.name}} ({{feedback.id}})    
+            </span>  
+        </li>
+    </ul>
+    <div>
+        <span *ngIf="isMore" (click)="getFeedback()" class="glyphicon glyphicon-chevron-down"></span>
+    </div>
+</div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector : 'main',
@@ -6,9 +7,26 @@ import { Component } from '@angular/core';
     styleUrls : ['main.component.css']
 })
 export class MainComponent{
-	private togglebtn : boolean = false;
+	public togglebtn : boolean = false;
 	public mobiletrue : boolean;
-    constructor(){
+	public userInfo = {};
+	public isAdmin :boolean = false;
+	public isTeacher :boolean = false; 
+    constructor( private router : Router){
+		if(localStorage.getItem('id') == 'admin'){
+			this.isAdmin = true;
+		}
+		else{
+			if(localStorage.getItem('semester') == '0'){
+				this.isTeacher = true;
+			}
+		}
+		this.userInfo = {
+			id : localStorage.getItem('id'),
+			semester : localStorage.getItem('semester'),
+			name : localStorage.getItem('name'),
+			email : localStorage.getItem('email') 
+		};
 		console.log("check2");
 		const mq = window.matchMedia( "(max-width: 500px)" );
 		if(mq.matches){
@@ -17,7 +35,8 @@ export class MainComponent{
 		else{
 			this.mobiletrue = false;
 		}
-    }
+	}
+	
     toggle(tg){
     	
 		if(this.togglebtn == false){
@@ -79,5 +98,10 @@ export class MainComponent{
 			this.toggleMobile("tg");
 		}
 		
+	}
+
+	logout(){
+		localStorage.clear();
+		this.router.navigateByUrl('/login');
 	}
 }

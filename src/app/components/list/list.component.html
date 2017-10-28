@@ -1,0 +1,6 @@
+<div *ngIf="isAdmin" style="color:white;border-radius:3px;" > 
+    <span style="width:50%;display:inline-block;background-color:black; "><a  style="display: block;padding:4px;border:1px solid black;" [routerLink] = "['student-list']" routerLinkActive="active"> Student List </a> </span> 
+    <span style="width:49.5%;display:inline-block;background-color:black;"> <a style="display: block;padding:4px;border:1px solid black; " [routerLink] = "['teacher-list']" routerLinkActive="active"> Teacher List </a></span> 
+</div>
+<div *ngIf="!isAdmin" style="color:white;border-radius:3px;background-color:black;padding:4px;" > Student List >> </div>
+<router-outlet></router-outlet>

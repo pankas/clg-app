@@ -1,0 +1,20 @@
+<div>
+    <div style="color:white;border-radius:3px;background-color:black;padding:4px;"> Student Form >> </div>
+    <div style="overflow:hidden; padding:10px">
+        <span *ngIf="!editMode" style="float:right; font-size:20px; padding-top:10px;padding-right:10px;" (click)="editMode = true" class="glyphicon glyphicon-pencil"></span>
+        <span *ngIf="editMode" style="float:right; font-size:20px; padding-top:10px;padding-right:10px;" (click)="editMode = false" class="glyphicon glyphicon-remove"></span>
+        <button style="float:left;" class="btn btn-primary" (click)="print()">Print</button>
+    </div>
+    
+    <div style="padding:20px" id="print-section">
+        <div *ngFor="let det of studentDetails | ObjNgFor">
+            <label>{{removeUnderScore(det)}} :</label>
+            <span style="display : block" *ngIf="det == 'Semester' || det == 'Name' || det == 'Enrollment_No' || !editMode">{{ studentDetails[det]}}</span>
+            <input class="form-control" (keyup)="onChange(det,value)" *ngIf="det != 'Semester' && det != 'Name' && det != 'Enrollment_No' && editMode" [value]="studentDetails[det]" #value type="text">
+            <br>
+        </div>
+    </div>
+    <div>
+        <input *ngIf="editMode" class="btn btn-primary" type="submit" (click)="saveChanges()" value="Save Changes">
+    </div>
+</div>

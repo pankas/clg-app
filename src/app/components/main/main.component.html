@@ -1,29 +1,28 @@
 <div class="main">
-    <div class="header">
+    <div style="position:fixed;width:100%;z-index:1000;" class="header">
 		<span *ngIf="!mobiletrue" id="left" class="left-toggle glyphicon glyphicon-menu-hamburger" #tg (click)="toggle(tg)" ></span>
 		<span *ngIf="mobiletrue" id="left" class="left-toggle glyphicon glyphicon-menu-hamburger" #tg (click)="toggleMobile(tg)" ></span>
     		<!-- <span id="right" class="right-toggle glyphicon glyphicon-menu-hamburger" (click)="toggle('right','left')"></span> -->
 		<span *ngIf="!mobiletrue" style="color:white;font-size:25px;margin-left:20px;top:15px;" >Ch. Brahm Prakash Govt. Engg. College</span>
 		<span *ngIf="mobiletrue && !togglebtn" style="color:white;font-size:25px;margin-left:20px;top:15px;" ></span>
 	</div>
+	<div style="height:60px;"></div>
     <div id="mySidenav" (click)="toggleMobileclose()" class="sidenav">
 		<div style="text-align:center">
 			<img class="profile-pic" src="/assets/profile.png" alt="Profile-Pic">
-			<h2 style="color:white;margin-bottom:0">Username</h2>
-			<p style="color:white">username@email.com</p>
-		</div>  
-		<a style="color:white;" >Profile</a>
-		<a style="color:white;" >Result</a>
-		  <a style="color:white;" >Library</a>
-		  <a style="color:white;" >Form Details</a>
+			<h2 style="color:white;margin-bottom:0">{{userInfo.name}}</h2>
+			<p style="color:white">{{userInfo.email}}</p>
+		</div>
+		<a *ngIf="isAdmin || isTeacher" [routerLink]="['list']" style="color:white;" >List</a>
+		<a *ngIf="isAdmin" [routerLink]="['create']" style="color:white;" >Create</a> 
+			<a *ngIf="!isAdmin && !isTeacher" [routerLink]="['student-form']" style="color:white;" >Form Details</a>
+			<a *ngIf="!isAdmin" [routerLink]="['assignment']" style="color:white;" >Assignment</a>
+			<a *ngIf="!isAdmin" [routerLink]="['feedback','add-feedback']" style="color:white;" >Feedback</a>
+			<a *ngIf="isAdmin" [routerLink]="['feedback']" style="color:white;" >Feedback</a>
+			<a (click)="logout()" style="color:white;" >Logout</a>
+			
 	</div>
-	<div id="main" (click)="toggleMobileclose()">
-  		<h2>College App</h2>
-  		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-  		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-  		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	<div id="main" (click)="toggleMobileclose()" style="padding:10px">
+			<router-outlet></router-outlet>
 	</div>
 </div>

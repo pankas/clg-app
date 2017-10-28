@@ -1,0 +1,68 @@
+<div>
+    <br>
+    <select class="form-control" style="width:30%" (change)="getStudentList()" [(ngModel)]="sem">
+        <option *ngFor="let semester of semesters" [value]="semester">Semester : {{semester}}</option>
+    </select>
+    <br>
+    <ul class="list-group">
+        <li class="list-group-item" style="padding:15px" *ngFor="let student of students">
+            <div (click)="openStudent(student)" style="width:10%;display:inline-block">
+                <img style="height:100px;width:100px;border:1px solid black;border-radius:5px;"src="/assets/profile.png" alt="">                    
+            </div>
+            <div (click)="openStudent(student)" style="width:40%;display:inline-block;margin-left:5px;">
+                    <span>Enrollment No : {{student.Enrollment_No}}</span><br>
+                    <span>Name : {{student.Name}}</span> <br>
+                    <span>Email : {{student.Email}}</span>
+            </div>
+            <div (click)="openStudent(student)" style="width:30%;display:inline-block">
+                <span>Semester : {{student.Semester}}</span>
+            </div>
+            <div *ngIf="isAdmin" style="width:10%;display:inline-block;color:red" >
+                <span (click)="deleteStu(student.roll)" class="glyphicon glyphicon-trash"></span>    
+            </div>
+                
+        </li>
+    </ul>
+
+    <span *ngIf="isMore" class="glyphicon glyphicon-chevron-down" (click)="more()"></span>
+</div>
+
+<div class="modal fade" id="studentDetail" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Student Detail</h4>
+            </div>
+            <div class="modal-body">
+                <div style="width:30%;float:left">
+                    <img src="/assets/profile.png" style="height:150px;width:150px;border:1px solid black;border-radius:5px;" alt="">
+                </div>
+                <div style="display:inline-block">
+                    <span *ngFor="let det of selectedStudent | ObjNgFor" > <strong> {{removeUnderScore(det)}}</strong> : {{selectedStudent[det]}}<br> </span>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+      <div class="modal fade" id="delete" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">Message</h4>
+                </div>
+                <div class="modal-body">
+                    Sure, Want delete
+                </div>
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-default" (click)="sure()" data-dismiss="modal">sure</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->

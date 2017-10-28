@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { AuthGuard } from './authgaurd';
+import { AuthGuard } from './providers/authgaurd';
 @NgModule({
   declarations: [
     AppComponent
@@ -22,7 +22,7 @@ import { AuthGuard } from './authgaurd';
       {
         path : 'main',
         loadChildren : 'app/components/main/main.module#MainModule',
-        // canLoad : [AuthGuard]    
+        canLoad : [AuthGuard]    
       }
     ])
   ],

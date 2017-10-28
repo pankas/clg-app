@@ -1,0 +1,13 @@
+<div>
+    <div style="color:white;border-radius:3px;background-color:black;padding:4px;"> Add Feedback >> </div>
+    <br>
+    <form style="padding:10px;" #form="ngForm" >
+        <label for="heading">Heading</label>
+        <input [(ngModel)]="heading" type="text" name="heading" class="form-control">
+        <label for="message">Message</label>
+        <textarea name="message" [(ngModel)]="message" id="message" class="form-control">
+        </textarea>
+        <br>
+        <input type="submit" (click)="submit(form)" class="btn btn-primary">
+    </form>
+</div>

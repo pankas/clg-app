@@ -3,17 +3,18 @@
         <img class="logo" src="/assets/logoclg.png" alt="logo">
         <div class="headnav">
         <div class="heading">
-            Ch. B. P. Govt. Engineering College, Jaffarpur<br>
+            <span class="head">Ch. B. P. Govt. Engineering College, Jaffarpur</span><br>
             <span id="smallhead">(Govt. of NCT of Delhi)</span>   
         </div>
     </div>
     </div>
-    <br><br><br>
+    <br class="break"><br class="break"><br>
     <div>
-        <form class="form">
-            <input type="text" placeholder="Enrollment No."/>
-            <input type="text" placeholder="Password"/>
+        <form class="form" (ngSubmit)="userLogin()">
+            <input type="text" [(ngModel)]="username" name="username" placeholder="Enrollment No." required/>
+            <input type="password" [(ngModel)]="password" name="password" placeholder="Password" required/>
             <input type="submit"/>
+            <p style="text-align: center;color:white;" *ngIf="error">Invalid Credentials</p>
         </form>
     </div>    
     <ul class="bg-bubbles">
