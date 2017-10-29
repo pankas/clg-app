@@ -1,6 +1,6 @@
 .header{
 	height : 55px;
-	background-color: #222535;
+	background-color: /* #222535 */ #24292e;
 	border-bottom: 1px solid white;
 }
 
@@ -44,7 +44,7 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #222535;
+    background-color: /*#222535 */ #24292e;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;

@@ -1,0 +1,80 @@
+<div style="color:white;border-radius:3px;background-color:black;padding:4px;"> Add Assignments >>
+    <a style="color:white;float:right" routerLink="/main/assignment" class="glyphicon glyphicon-remove"></a>
+</div>
+<br>
+<form style="padding:20px;" [formGroup]="assignment" (submit)="submit()">
+    <select style="width:50%" class="form-control" formControlName="subject" id="">
+        <option selected="selected" disabled="disabled" value="">
+            Select Subject
+        </option>
+        <option *ngFor="let subject of subjectList" [value]="subject.subName">
+            {{subject.subName}}
+        </option>
+        <br>
+    </select>
+    <br>
+    <label for="title">Title</label>
+    <input type="text" formControlName="heading" class="form-control">
+    <br>
+    <div style="width:49%;float:left">
+        <label for=""> Date Of Test </label>
+        <input type="date" formControlName="dateOfTest" class="form-control">
+        <br>
+        <label for="">Department</label>
+        <select class="form-control" formControlName="department" id="">
+            <option value="IT">IT</option>
+            <option value="CIVIL">CIVIL</option>
+        </select>
+    </div>
+    <div style="margin-left:1%; width:49%;float:left">
+        <label for="">Start Time</label>
+        <input type="time" formControlName="stTime" class="form-control">
+        <br>
+        <label for="">End Time</label>
+        <input type="time" formControlName="endTime" class="form-control">
+    </div>
+    <br><br>
+    <label for="">Instructions</label>
+    <textarea formControlName="instructions" class="form-control"></textarea>
+    <hr>
+    <div formArrayName="ques">
+        <div *ngFor="let q of formData.controls; let i = index " >
+            <div [formGroupName]="i" >
+                Question {{i + 1}} <br>
+                <input style="width:80%;display:inline-block" type="text" formControlName="qu1" class="form-control"> <span *ngIf="i!=0" class="glyphicon glyphicon-remove" (click)="remove(i)"></span><br><br>
+                Option 1
+                <input style="width:50%" type="text" formControlName="op1" class="form-control"><br>
+                Option 2
+                <input style="width:50%" type="text" formControlName="op2" class="form-control"><br>
+                Option 3
+                <input style="width:50%" type="text" formControlName="op3" class="form-control"><br>
+                Option 4
+                <input style="width:50%" type="text" formControlName="op4" class="form-control"> <br>  
+                Answer
+                <input style="width:50%" type="text" formControlName="answer" class="form-control">
+            </div>
+            <br>
+            <span *ngIf="assignment.get('ques').length == i+1" class="glyphicon glyphicon-plus" (click)="add()"></span>
+            <br>
+        </div>         
+    </div>
+    <br>
+    <input type="submit" class="btn btn-primary">
+</form>
+
+<div class="modal fade" id="message" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Message</h4>
+            </div>
+            <div class="modal-body">
+              <p>Assignment Added Succesfully</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->

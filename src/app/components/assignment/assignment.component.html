@@ -1,11 +1,11 @@
 <div>
     <div style="color:white;border-radius:3px;background-color:black;padding:4px;" > Assignments >> 
-        <span class="glyphicon glyphicon-plus"> <a [routerLink]='["add-assignment"]' class="glyphicon glyphicon-plus" ></a> </span>
+         <a *ngIf="isTeacher" style="color:white;float:right" [routerLink]='["add-assignment"]' class="glyphicon glyphicon-plus" ></a> 
     </div>
     <div *ngIf="assignments.length > 0">
         <br *ngIf="isTeacher">
         <br *ngIf="isTeacher">
-        <span class="glyphicon glyphicon-plus" *ngIf="isTeacher" style="float:right"></span>
+       
     <div [style.borderBottomColor]="assignment.colorCode" class="cards" *ngFor="let assignment of assignments" (click)="openAssignment(assignment)" >
         <span>{{assignment.heading}}</span>
         <br>

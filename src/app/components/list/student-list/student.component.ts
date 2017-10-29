@@ -23,12 +23,18 @@ export class StudentList{
             this.getSemList();
         }
         this.getStudentList();
-
     }   
     
     getSemList(){
         this.ls.getStudentListById(localStorage.getItem('id')).subscribe( (res:any) => {
             console.log(res);
+            this.semesters = [];
+            for(let r of res){
+                if(this.semesters.indexOf(r.semester) == -1){
+                    this.semesters.push(r.semester)
+                }
+            }
+            console.log(this.semesters);
         }, (err :any) => {
 
         })

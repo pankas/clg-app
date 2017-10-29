@@ -5,16 +5,17 @@ import { CommonModule } from '@angular/common';
 import { CustomHttpService } from '../../providers/customHttp.service';
 import { Urls } from '../../providers/urls';
 import { HttpModule } from '@angular/http';
-import { ObjNgFor } from '../../pipe/obj.pipe';
+import { Shared } from '../../shared.module'
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-    imports : [  HttpModule,CommonModule,RouterModule.forChild([
+    imports : [Shared, FormsModule,  HttpModule,CommonModule,RouterModule.forChild([
         {
             path : '',
             component : StudentFormComponent
         }
     ])],
-    declarations : [ ObjNgFor,StudentFormComponent ],
+    declarations : [ StudentFormComponent ],
     providers : [ Urls, CustomHttpService]
 
 })

@@ -1,16 +1,19 @@
-<div>
+<div *ngIf="isStudent">
     <div style="color:white;border-radius:3px;background-color:black;padding:4px;"> Student Form >> </div>
     <div style="overflow:hidden; padding:10px">
-        <span *ngIf="!editMode" style="float:right; font-size:20px; padding-top:10px;padding-right:10px;" (click)="editMode = true" class="glyphicon glyphicon-pencil"></span>
-        <span *ngIf="editMode" style="float:right; font-size:20px; padding-top:10px;padding-right:10px;" (click)="editMode = false" class="glyphicon glyphicon-remove"></span>
+        <span *ngIf="!editMode" style="float:right; font-size:20px; padding-top:10px;padding-right:10px;" (click)="editMode = true"
+            class="glyphicon glyphicon-pencil"></span>
+        <span *ngIf="editMode" style="float:right; font-size:20px; padding-top:10px;padding-right:10px;" (click)="editMode = false"
+            class="glyphicon glyphicon-remove"></span>
         <button style="float:left;" class="btn btn-primary" (click)="print()">Print</button>
     </div>
-    
+
     <div style="padding:20px" id="print-section">
         <div *ngFor="let det of studentDetails | ObjNgFor">
             <label>{{removeUnderScore(det)}} :</label>
             <span style="display : block" *ngIf="det == 'Semester' || det == 'Name' || det == 'Enrollment_No' || !editMode">{{ studentDetails[det]}}</span>
-            <input class="form-control" (keyup)="onChange(det,value)" *ngIf="det != 'Semester' && det != 'Name' && det != 'Enrollment_No' && editMode" [value]="studentDetails[det]" #value type="text">
+            <input class="form-control" (keyup)="onChange(det,value)" *ngIf="det != 'Semester' && det != 'Name' && det != 'Enrollment_No' && editMode"
+                [value]="studentDetails[det]" #value type="text">
             <br>
         </div>
     </div>
@@ -18,3 +21,49 @@
         <input *ngIf="editMode" class="btn btn-primary" type="submit" (click)="saveChanges()" value="Save Changes">
     </div>
 </div>
+<div *ngIf="!isStudent">
+    <div style="color:white;border-radius:3px;background-color:black;padding:4px;"> Form Column List >> </div>
+    <br>
+    <ul class="list-group">
+        <li *ngFor="let col of columnList" class="list-group-item">
+            {{nameChange(col)}} <span (click)="delete=false;deleteItem(col)" class="glyphicon glyphicon-remove"></span>
+        </li>
+    </ul>
+    <input style="width:60%;display:inline-block" type="text" [(ngModel)]="colName" class="form-control">
+    <input type="button" class="btn btn-primary" (click)="addCol()" value="Add Column">
+</div>
+
+<div class="modal fade" id="delete" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Confirm</h4>
+            </div>
+            <div class="modal-body">
+              Sure, Want to delete ?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" (click)="delete=true;deleteItem()" data-dismiss="modal" class="btn btn-primary">Delete</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+      <div class="modal fade" id="message" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">Message</h4>
+                </div>
+                <div class="modal-body">
+                  <p>{{message}}</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->

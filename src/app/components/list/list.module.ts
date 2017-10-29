@@ -8,11 +8,11 @@ import { CustomHttpService } from '../../providers/customHttp.service';
 import { Urls } from '../../providers/urls';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
-import { ObjNgFor } from '../../pipe/obj.pipe';
+import { Shared } from '../../shared.module';
 
 
 @NgModule({
-    imports : [ FormsModule ,HttpModule, CommonModule, RouterModule.forChild([
+    imports : [ FormsModule ,HttpModule,Shared, CommonModule, RouterModule.forChild([
         {
             path : '',
             redirectTo : 'student-list',
@@ -33,7 +33,7 @@ import { ObjNgFor } from '../../pipe/obj.pipe';
             ]
         }
     ])],
-    declarations : [ObjNgFor, ListComponent, StudentList, TeacherList ],
+    declarations : [ ListComponent, StudentList, TeacherList ],
     providers : [ CustomHttpService,Urls]
 })
 export class ListModule{

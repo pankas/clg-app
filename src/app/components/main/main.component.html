@@ -15,7 +15,7 @@
 		</div>
 		<a *ngIf="isAdmin || isTeacher" [routerLink]="['list']" style="color:white;" >List</a>
 		<a *ngIf="isAdmin" [routerLink]="['create']" style="color:white;" >Create</a> 
-			<a *ngIf="!isAdmin && !isTeacher" [routerLink]="['student-form']" style="color:white;" >Form Details</a>
+			<a *ngIf="!isTeacher" [routerLink]="['student-form']" style="color:white;" >Form Details</a>
 			<a *ngIf="!isAdmin" [routerLink]="['assignment']" style="color:white;" >Assignment</a>
 			<a *ngIf="!isAdmin" [routerLink]="['feedback','add-feedback']" style="color:white;" >Feedback</a>
 			<a *ngIf="isAdmin" [routerLink]="['feedback']" style="color:white;" >Feedback</a>
@@ -23,6 +23,7 @@
 			
 	</div>
 	<div id="main" (click)="toggleMobileclose()" style="padding:10px">
-			<router-outlet></router-outlet>
+			<router-outlet>
+			</router-outlet>
 	</div>
 </div>

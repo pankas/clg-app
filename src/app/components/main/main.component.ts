@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class MainComponent{
 	public togglebtn : boolean = false;
 	public mobiletrue : boolean;
-	public userInfo = {};
+	public userInfo;
 	public isAdmin :boolean = false;
 	public isTeacher :boolean = false; 
     constructor( private router : Router){

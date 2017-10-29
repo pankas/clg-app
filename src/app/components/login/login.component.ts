@@ -22,6 +22,10 @@ export class LoginComponent{
                 localStorage.setItem('id', res.id);
                 localStorage.setItem('semester', res.semester);
                 localStorage.setItem('name', res.name);
+                if(res.department){
+                    localStorage.setItem('department', res.department);
+                }
+                
                 this.getUserInfo();
             }
             else{

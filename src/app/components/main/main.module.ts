@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import {  Urls } from "../../providers/urls";
 import { CustomHttpService } from "../../providers/customHttp.service";
 import { HttpModule } from '@angular/http';
+// import { ObjNgFor } from '../../pipe/obj.pipe';
 @NgModule({
     imports : [ HttpModule, CommonModule,RouterModule.forChild([
         {
