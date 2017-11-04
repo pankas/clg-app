@@ -1,17 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+declare let $ :any;
 @Component({
     selector : 'main',
     templateUrl : 'main.component.html',
     styleUrls : ['main.component.css']
 })
-export class MainComponent{
-	public togglebtn : boolean = false;
-	public mobiletrue : boolean;
-	public userInfo;
-	public isAdmin :boolean = false;
-	public isTeacher :boolean = false; 
+export class MainComponent implements AfterViewInit{
+	 togglebtn : boolean = true;
+	 mobiletrue : boolean;
+	 userInfo;
+	isAdmin :boolean = false;
+	isTeacher :boolean = false; 
+	message : string = '';
     constructor( private router : Router){
 		if(localStorage.getItem('id') == 'admin'){
 			this.isAdmin = true;
@@ -35,10 +37,25 @@ export class MainComponent{
 		else{
 			this.mobiletrue = false;
 		}
+		if(this.isAdmin == true || this.isTeacher == true){
+			this.router.navigate(['/main/list']);
+		}
+		else{
+			this.router.navigate(['/main/student-form']);
+		}
+		// this.toggle();
+	}
+
+	ngAfterViewInit(){
+		const mq = window.matchMedia( "(max-width: 500px)" );
+		if(!mq.matches){
+			this.togglebtn = false;
+			this.toggle();
+		}
 	}
 	
-    toggle(tg){
-    	
+    toggle(tg?){
+    	console.log("cdss");
 		if(this.togglebtn == false){
 			this.togglebtn = true;
 			document.getElementById("mySidenav").style.width = "280px";
@@ -98,6 +115,13 @@ export class MainComponent{
 			this.toggleMobile("tg");
 		}
 		
+	}
+
+	asklogout(){
+		console.log("cadcdcdfwrfc");
+		this.message = "Sure, want to logout";
+		console.log(this.message);
+		$('#mes').modal('show');
 	}
 
 	logout(){

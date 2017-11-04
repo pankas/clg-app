@@ -7,3 +7,10 @@
     padding:10px;
     border-bottom:  3.5px solid black;
 }
+
+@media all and (max-width:500px){
+    .cards{
+        display : block !important;
+        width:96% !important;
+    }
+}    

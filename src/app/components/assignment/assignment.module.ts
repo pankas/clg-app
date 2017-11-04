@@ -6,10 +6,10 @@ import { CustomHttpService } from '../../providers/customHttp.service';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 import { AddAssignmentComponent } from './add/add.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
-    imports : [ ReactiveFormsModule ,HttpModule, CommonModule, RouterModule.forChild([
+    imports : [ ReactiveFormsModule ,FormsModule ,HttpModule, CommonModule, RouterModule.forChild([
         {
             path : '',
             component : AssignmentComponent

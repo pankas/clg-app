@@ -1,24 +1,27 @@
 <div>
     <br>
-    <select class="form-control" style="width:30%" (change)="getStudentList()" [(ngModel)]="sem">
+    <select class="form-control" style="width:50%" (change)="getStudentList()" [(ngModel)]="sem">
         <option *ngFor="let semester of semesters" [value]="semester">Semester : {{semester}}</option>
     </select>
     <br>
+    <div *ngIf="students.length == 0" style="margin-top:20px">
+        <div style="margin:auto" class="loader"></div>
+    </div>
     <ul class="list-group">
         <li class="list-group-item" style="padding:15px" *ngFor="let student of students">
             <div (click)="openStudent(student)" style="width:10%;display:inline-block">
-                <img style="height:100px;width:100px;border:1px solid black;border-radius:5px;"src="/assets/profile.png" alt="">                    
+                <img class="stuimage" style="height:100px;width:100px;border:1px solid black;border-radius:5px;"src="/assets/profile.png" alt="">                    
             </div>
-            <div (click)="openStudent(student)" style="width:40%;display:inline-block;margin-left:5px;">
+            <div class="innerdiv1" (click)="openStudent(student)" style="width:40%;display:inline-block;margin-left:5px;">
                     <span>Enrollment No : {{student.Enrollment_No}}</span><br>
                     <span>Name : {{student.Name}}</span> <br>
                     <span>Email : {{student.Email}}</span>
             </div>
-            <div (click)="openStudent(student)" style="width:30%;display:inline-block">
+            <div class="innerdiv2" (click)="openStudent(student)" style="width:30%;display:inline-block">
                 <span>Semester : {{student.Semester}}</span>
             </div>
             <div *ngIf="isAdmin" style="width:10%;display:inline-block;color:red" >
-                <span (click)="deleteStu(student.roll)" class="glyphicon glyphicon-trash"></span>    
+                <span (click)="deleteStu(student.Enrollment_No)" class="glyphicon glyphicon-trash"></span>    
             </div>
                 
         </li>
@@ -35,10 +38,10 @@
               <h4 class="modal-title">Student Detail</h4>
             </div>
             <div class="modal-body">
-                <div style="width:30%;float:left">
+                <div class="infoimg" style="width:30%;float:left">
                     <img src="/assets/profile.png" style="height:150px;width:150px;border:1px solid black;border-radius:5px;" alt="">
                 </div>
-                <div style="display:inline-block">
+                <div class="info" style="display:inline-block">
                     <span *ngFor="let det of selectedStudent | ObjNgFor" > <strong> {{removeUnderScore(det)}}</strong> : {{selectedStudent[det]}}<br> </span>
                 </div>
             </div>

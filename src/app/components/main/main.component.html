@@ -3,23 +3,23 @@
 		<span *ngIf="!mobiletrue" id="left" class="left-toggle glyphicon glyphicon-menu-hamburger" #tg (click)="toggle(tg)" ></span>
 		<span *ngIf="mobiletrue" id="left" class="left-toggle glyphicon glyphicon-menu-hamburger" #tg (click)="toggleMobile(tg)" ></span>
     		<!-- <span id="right" class="right-toggle glyphicon glyphicon-menu-hamburger" (click)="toggle('right','left')"></span> -->
-		<span *ngIf="!mobiletrue" style="color:white;font-size:25px;margin-left:20px;top:15px;" >Ch. Brahm Prakash Govt. Engg. College</span>
+		<span *ngIf="!mobiletrue" style="color:white;font-size:25px;margin-left:20px;vertical-align:center;" >Ch. Brahm Prakash Govt. Engg. College</span>
 		<span *ngIf="mobiletrue && !togglebtn" style="color:white;font-size:25px;margin-left:20px;top:15px;" ></span>
 	</div>
 	<div style="height:60px;"></div>
-    <div id="mySidenav" (click)="toggleMobileclose()" class="sidenav">
+    <div (load)="toggle()" id="mySidenav" (click)="toggleMobileclose()" class="sidenav">
 		<div style="text-align:center">
 			<img class="profile-pic" src="/assets/profile.png" alt="Profile-Pic">
 			<h2 style="color:white;margin-bottom:0">{{userInfo.name}}</h2>
 			<p style="color:white">{{userInfo.email}}</p>
 		</div>
-		<a *ngIf="isAdmin || isTeacher" [routerLink]="['list']" style="color:white;" >List</a>
-		<a *ngIf="isAdmin" [routerLink]="['create']" style="color:white;" >Create</a> 
-			<a *ngIf="!isTeacher" [routerLink]="['student-form']" style="color:white;" >Form Details</a>
-			<a *ngIf="!isAdmin" [routerLink]="['assignment']" style="color:white;" >Assignment</a>
-			<a *ngIf="!isAdmin" [routerLink]="['feedback','add-feedback']" style="color:white;" >Feedback</a>
-			<a *ngIf="isAdmin" [routerLink]="['feedback']" style="color:white;" >Feedback</a>
-			<a (click)="logout()" style="color:white;" >Logout</a>
+		<a *ngIf="isAdmin || isTeacher" [routerLink]="['list']" routerLinkActive="sidebarnav" style="color:white;" >List</a>
+		<a *ngIf="isAdmin" [routerLink]="['create']" routerLinkActive="sidebarnav" style="color:white;" >Create</a> 
+			<a *ngIf="!isTeacher" [routerLink]="['student-form']" routerLinkActive="sidebarnav" style="color:white;" >Form Details</a>
+			<a *ngIf="!isAdmin" [routerLink]="['assignment']" routerLinkActive="sidebarnav" style="color:white;" >Assignment</a>
+			<a *ngIf="!isAdmin" [routerLink]="['feedback','add-feedback']" routerLinkActive="sidebarnav" style="color:white;" >Feedback</a>
+			<a *ngIf="isAdmin" [routerLink]="['feedback']" routerLinkActive="sidebarnav" style="color:white;" >Feedback</a>
+			<a (click)="asklogout()" style="color:white;" >Logout</a>
 			
 	</div>
 	<div id="main" (click)="toggleMobileclose()" style="padding:10px">
@@ -27,3 +27,21 @@
 			</router-outlet>
 	</div>
 </div>
+
+<div class="modal fade" id="mes" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  <h4 class="modal-title">Message</h4>
+		</div>
+		<div class="modal-body">
+		  {{message}}
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  <button type="button" data-dismiss="modal" (click)="logout()" class="btn btn-primary">Sure</button>
+		</div>
+	  </div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->

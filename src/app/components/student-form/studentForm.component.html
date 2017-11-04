@@ -1,5 +1,5 @@
 <div *ngIf="isStudent">
-    <div style="color:white;border-radius:3px;background-color:black;padding:4px;"> Student Form >> </div>
+    <div class="topnavhead"> Student Form >> </div>
     <div style="overflow:hidden; padding:10px">
         <span *ngIf="!editMode" style="float:right; font-size:20px; padding-top:10px;padding-right:10px;" (click)="editMode = true"
             class="glyphicon glyphicon-pencil"></span>
@@ -7,7 +7,9 @@
             class="glyphicon glyphicon-remove"></span>
         <button style="float:left;" class="btn btn-primary" (click)="print()">Print</button>
     </div>
-
+    <!-- <div *ngIf="studentDetails.length == 0" style="margin-top:20px">
+      <div style="margin:auto" class="loader"></div>
+  </div> -->
     <div style="padding:20px" id="print-section">
         <div *ngFor="let det of studentDetails | ObjNgFor">
             <label>{{removeUnderScore(det)}} :</label>
@@ -22,8 +24,11 @@
     </div>
 </div>
 <div *ngIf="!isStudent">
-    <div style="color:white;border-radius:3px;background-color:black;padding:4px;"> Form Column List >> </div>
+    <div class="topnavhead"> Form Column List >> </div>
     <br>
+    <div *ngIf="columnList.length == 0" style="margin-top:20px">
+      <div style="margin:auto" class="loader"></div>
+  </div>
     <ul class="list-group">
         <li *ngFor="let col of columnList" class="list-group-item">
             {{nameChange(col)}} <span (click)="delete=false;deleteItem(col)" class="glyphicon glyphicon-remove"></span>

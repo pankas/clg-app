@@ -9,7 +9,7 @@ import { FeedbackService } from '../../providers/feedback.service';
 export class FeedbackComponent{
     isMore: boolean;
     pgNo : number = 1;
-    feedbacks : any [];
+    feedbacks : any [] = []; 
     constructor( private fs : FeedbackService ){
         this.getFeedback();
     } 

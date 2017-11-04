@@ -16,7 +16,7 @@ export class StudentFormComponent {
     public studentDetails: any = {};
     public editMode: boolean = false;
     isStudent: boolean;
-    columnList: any[];
+    columnList: any[] = [];
     delete: boolean = false;
     constructor(private fs: FormService) {
         this.enrNo = localStorage.getItem('id');

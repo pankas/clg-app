@@ -1,72 +1,181 @@
 <div>
-    <div style="color:white;border-radius:3px;background-color:black;padding:4px;" > Assignments >> 
-         <a *ngIf="isTeacher" style="color:white;float:right" [routerLink]='["add-assignment"]' class="glyphicon glyphicon-plus" ></a> 
+    <div class="topnavhead"> Assignments >>
+        <a *ngIf="isTeacher" style="color:white;float:right" [routerLink]='["add-assignment"]' class="glyphicon glyphicon-plus"></a>
+    </div>
+    <div style="margin-top:20px;">
+        <div class="loader" style="margin:auto" *ngIf="assignments.length == 0">
+
+        </div>
     </div>
     <div *ngIf="assignments.length > 0">
         <br *ngIf="isTeacher">
         <br *ngIf="isTeacher">
-       
-    <div [style.borderBottomColor]="assignment.colorCode" class="cards" *ngFor="let assignment of assignments" (click)="openAssignment(assignment)" >
-        <span>{{assignment.heading}}</span>
-        <br>
-        <span [style.color] = "assignment.colorCode">
-            @{{assignment.status}}
-        </span><br>
-        <span>
-            {{assignment.subject}}
-        </span><br>
-        <span>
-            from {{getTeacherName(assignment.teacherId)}}
-        </span>
 
-        <br>
-        <br>
-        <span>
-            On {{assignment.dateOfTest | date}}
-        </span><br>
-        <span>
-        from {{assignment.startTime}} to {{assignment.endTime}}
-    </span>
-    </div>
+        <div [style.borderBottomColor]="assignment.colorCode" class="cards" *ngFor="let assignment of assignments;let i = index" (click)="openAssignment(assignment,i)">
+            <span>{{assignment.heading}}</span>
+            <br>
+            <span [style.color]="assignment.colorCode">
+                @{{assignment.status}}
+            </span>
+            <br>
+            <span>
+                {{assignment.subject}}
+            </span>
+            <br>
+            <span *ngIf="!isTeacher">
+                from {{getTeacherName(assignment.teacherId)}}
+            </span>
+
+            <br>
+            <br>
+            <span>
+                On {{assignment.dateOfTest | date}}
+            </span>
+            <br>
+            <span>
+                from {{assignment.startTime}} to {{assignment.endTime}}
+            </span>
+        </div>
     </div>
 </div>
 
 <!-- open assignment -->
 <div class="modal fade" id="openAssignment" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">{{selectedAssignment.heading}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">{{selectedAssignment.heading}}</h4>
             </div>
             <div class="modal-body">
-              <span>Subject : 
-                  {{ selectedAssignment.subject }}
-              </span>
-              <br>
-              <span [style.color]="selectedAssignment.colorCode" >
-                @{{ selectedAssignment.status}}
-              </span>
-              <br><br>
-              <span>
-                On {{selectedAssignment.dateOfTest | date}}
-            </span><br>
-              <span>
-                from  {{getTeacherName(selectedAssignment.teacherId)}}
-              </span>
-              <hr>
-              <span>
-                  INSTRUCTIONS : <br>
-                  {{
-                      selectedAssignment.instructions
-                  }}
-              </span>
+                <span *ngIf="isTeacher && !editDet && selectedAssignment.status=='New'" style="float:right" class="glyphicon glyphicon-pencil"
+                    (click)="editDet=true"></span>
+                <span *ngIf="editDet" style="float:right" class="glyphicon glyphicon-remove" (click)="selectedAssignment=selectedAssignmentCopy;editDet=false;"></span>
+                <span>Subject : {{ selectedAssignment.subject }}
+                </span>
+                <br>
+                <span [style.color]="selectedAssignment.colorCode">
+                    @{{ selectedAssignment.status}}
+                </span>
+                <br>
+                <br>
+                <span>
+                    <span *ngIf="!editDet">On {{selectedAssignment.dateOfTest | date}} </span>
+                    <span *ngIf="editDet"> Date Of Test</span>
+                    <input *ngIf="editDet" [(ngModel)]="selectedAssignment.dateOfTest" type="date" class="form-control">
+                </span>
+                <br>
+                <span>
+                    <span *ngIf="!editDet"> {{selectedAssignment.startTime}} - {{selectedAssignment.endTime}} </span>
+                    <span *ngIf="editDet">Start Time</span>
+                    <input class="form-control" *ngIf="editDet" type="time" [(ngModel)]="selectedAssignment.startTime">
+                    <span *ngIf="editDet">End Time</span>
+                    <input class="form-control" *ngIf="editDet" type="time" [(ngModel)]="selectedAssignment.endTime">
+                </span>
+                <br>
+                <span *ngIf="!isTeacher">
+                    from {{getTeacherName(selectedAssignment.teacherId)}}
+                </span>
+                <hr>
+                <span *ngIf="!editDet">
+                    INSTRUCTIONS :
+                    <br> {{ selectedAssignment.instructions }}
+                </span>
+                <span *ngIf="editDet">Intructions</span>
+                <textarea *ngIf="editDet" [(ngModel)]="selectedAssignment.instructions" class="form-control"></textarea>
+                <div style="overflow:hidden">
+                    <input *ngIf="editDet" type="submit" style="float:right;margin:15px" (click)="updateAssignment()" class="btn btn-primary">
+                </div>
+                <hr>
+                <div *ngIf="isTeacher && questionData.length == 0">
+                    <div class="loader" style="margin:auto"></div>
+                </div>
+
+                <!-- <div *ngIf="!isTeacher" > -->
+                <!-- <button class="btn btn-success" (click)="getQuestions(selectedAssignment.assid)" *ngIf="isStart && !isStarted">Start Test</button> -->
+                <!-- </div> -->
+                <!-- <div *ngIf="!isTeacher && isStarted && !isRunning">
+                    <div class="loader" style="margin:auto"></div>
+                </div>
+                <div *ngIf="isRunning">
+                    <div *ngFor="let ques of questions; let i = index">
+                        <form>
+                            <div>Question {{i+1}}) {{ques.ques}} </div><br>
+                            <div>
+                                <input type="radio" (click)="answered(ques.op1,i+1)" name="ques+{{i+1}}" > {{ques.op1}}
+                            </div>
+                            <div>
+                                <input type="radio" (click)="answered(ques.op2,i+1)" name="ques+{{i+1}}" > {{ques.op2}}
+                            </div>
+                            <div>
+                                <input type="radio" name="ques+{{i+1}}" (click)="answered(ques.op3,i+1)" > {{ques.op3}}
+                            </div>
+                            <div>
+                                <input type="radio" name="ques+{{i+1}}" (click)="answered(ques.op4,i+1)" > {{ques.op4}}
+                            </div>
+                        </form><br>
+                    </div>
+                    <input type="submit" class="btn btn-primary"  (click)="submitAnswers(selectedAssignment.assid)">
+                </div> -->
+
+                <div *ngIf="isTeacher">
+                    <span *ngIf="!editMode && selectedAssignment.status=='New'" style="float:right" class="glyphicon glyphicon-pencil" (click)="editMode=true"></span>
+                    <span *ngIf="editMode" style="float:right" class="glyphicon glyphicon-remove" (click)="editMode=false"></span>
+                    <div *ngFor="let data of questionData;let i =index;trackBy : trackByFn">
+                        <span>
+                            Question {{i+1}} :
+                            <span *ngIf="!editMode">{{data.ques}}</span>
+                            <span class="glyphicon glyphicon-trash" (click)="deleteQuestion(i)" style="color : red" *ngIf="editMode"></span>
+                            <input type="text" [(ngModel)]="questionData[i].ques" name="ques" class="form-control" *ngIf="editMode" [value]="data.ques">
+                        </span>
+                        <br>
+                        <span>
+                            Option 1 :
+                            <span *ngIf="!editMode">{{data.op1}}</span>
+                            <input type="text" [(ngModel)]="questionData[i].op1" name="op1" class="form-control" *ngIf="editMode" [value]="data.op1">
+                        </span>
+                        <br>
+                        <span>
+                            Option 2 :
+                            <span *ngIf="!editMode">{{data.op2}}</span>
+                            <input type="text" class="form-control" name="op2" [(ngModel)]="questionData[i].op2" *ngIf="editMode" [value]="data.op2">
+                        </span>
+                        <br>
+                        <span *ngIf="data.op3">
+                            Option 3 :
+                            <span *ngIf="!editMode">{{data.op3}}</span>
+                            <input type="text" class="form-control" name="op3" [(ngModel)]="questionData[i].op3" *ngIf="editMode" [value]="data.op3">
+                        </span>
+                        <br>
+                        <span *ngIf="data.op4">
+                            Option 4 :
+                            <span *ngIf="!editMode">{{data.op4}}</span>
+                            <input type="text" class="form-control" name="op4" [(ngModel)]="questionData[i].op4" *ngIf="editMode" [value]="data.op4">
+                        </span>
+                        <br>
+                        <span>
+                            Answer :
+                            <span *ngIf="!editMode">{{data.answer}}</span>
+                            <input type="text" class="form-control" name="answer" *ngIf="editMode" [(ngModel)]="questionData[i].answer" [value]="data.answer">
+                        </span>
+                        <br>
+                        <br>
+
+                    </div>
+                    <div style="overflow:hidden">
+                        <input *ngIf="editMode" type="submit" style="float:right" class="btn btn-primary" (click)="save()">
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button *ngIf="selectedAssignment.status == 'Inprogress'" type="button" class="btn btn-primary">Start Test</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button *ngIf="selectedAssignment.status == 'Inprogress'" type="button" class="btn btn-primary">Start Test</button>
             </div>
-          </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-      </div><!-- /.modal -->
-      
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

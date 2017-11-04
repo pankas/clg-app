@@ -19,7 +19,14 @@ export class LoginComponent{
             if(res.access_token){
                 localStorage.setItem('access_token', res.access_token);
                 localStorage.setItem('email', res.email);
-                localStorage.setItem('id', res.id);
+                
+                if(res.id == 0){
+                    localStorage.setItem('id', 'admin');
+                }
+                else{
+                    localStorage.setItem('id', res.id);
+                }
+                
                 localStorage.setItem('semester', res.semester);
                 localStorage.setItem('name', res.name);
                 if(res.department){

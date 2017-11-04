@@ -23,14 +23,26 @@ export class AssignmentService {
         return localStorage.getItem('id');
     }
     
-    getAssignments(sem?:any){
+    getAssignments(sem?:any,pgNo?:any){
         if(this.getAccountType() == 'teacher'){
             return this.http.get( this.urls.url + `/assignment/semester/${sem || 5}/${this.getAccountType()}/${this.getId()}`);
         }
         else{
-            return this.http.get( this.urls.url + `/assignment/semester/${localStorage.getItem('semester')}/department/${localStorage.getItem('department') || 'it'}`);
+            return this.http.get( this.urls.url + `/assignment/semester/${localStorage.getItem('semester')}/department/${localStorage.getItem('department') || 'it'}/page/${pgNo}`);
         }
         
+    }
+
+    getAssignmentData(assId : any){
+        return this.http.get( this.urls.url + `/assignment/${this.getAccountType()}/wans/id/${assId}`);
+    }
+
+    submitAssignment(assId:any,sol:any){
+        return this.http.post( this.urls.url + `/assignment/submit/student/${localStorage.getItem('id')}/assignID/${assId}`,sol);
+    }
+
+    getAssignmentQues(assId : any){
+        return this.http.get( this.urls.url + `/assignment/student/ques/id/${assId}`);
     }
 
     getTeacherDetails(pgNo){
@@ -43,5 +55,20 @@ export class AssignmentService {
 
     postAssignment(data){
         return this.http.post( this.urls.url + '/assignment',data);
+    }
+
+    getQuestions(id){
+        return this.http.get( this.urls.url + `/assignment/student/ques/id/${id}`);
+    }
+
+    submitAnswers(id,answer){
+        return this.http.post( this.urls.url + `/assignment/submit/student/${localStorage.getItem('id')}/assignID/${id}`,answer);
+    }
+
+    updateAssignment(id,update){
+        return this.http.post( this.urls.url + `/assignment/update/general/assid/${id}`,update);
+    }
+    updateAssignmentQues(id,update){
+        return this.http.post( this.urls.url + `/assignment/update/questions/assid/${id}`,update);
     }
 }

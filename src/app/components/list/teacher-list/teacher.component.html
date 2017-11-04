@@ -1,9 +1,12 @@
 <div>
     <br>
+    <div *ngIf="teachers.length == 0" style="margin-top:20px">
+        <div style="margin:auto" class="loader"></div>
+    </div>
     <ul class="list-group">
         <li class="list-group-item" style="padding:15px" *ngFor="let teacher of teachers">
             <div (click)="openStudent(teacher)" style="width:10%;display:inline-block">
-                <img style="height:100px;width:100px;border:1px solid black;border-radius:5px;"src="/assets/profile.png" alt="">                    
+                <img class="teaimage" style="height:100px;width:100px;border:1px solid black;border-radius:5px;"src="/assets/profile.png" alt="">                    
             </div>
             <div (click)="openStudent(teacher)" style="width:40%;display:inline-block;margin-left:5px;">
                     <span>UserName : {{teacher.teacherId}}</span><br>
@@ -29,10 +32,10 @@
           <h4 class="modal-title">Teacher Detail</h4>
         </div>
         <div class="modal-body">
-            <div style="width:30%;display:inline-block">
+            <div class="infoimg" style="width:30%;display:inline-block">
                 <img src="/assets/profile.png" style="height:150px;width:150px;border:1px solid black;border-radius:5px;" alt="">
             </div>
-            <div style="width:60%;height:150px;display:inline-block">
+            <div class="info" style="width:60%;height:150px;display:inline-block">
                 <span>Enrollment No : {{selectedTeacher.teacherId}}</span><br>
                 <span>Name : {{selectedTeacher.teacherName}}</span><br>
                 <span>Phone No : {{selectedTeacher.phoneNumber}}</span><br>

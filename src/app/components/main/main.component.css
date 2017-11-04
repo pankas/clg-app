@@ -76,3 +76,10 @@
     padding: 16px;
     height:100%;
 }
+
+.sidebarnav{
+    /* color:#24292e !important; */
+    background-color:#3f4a52;
+    border: 1px solid #24292e;
+    border-left: 1px solid #24292e; 
+}

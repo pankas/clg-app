@@ -1,0 +1,14 @@
+@media all and (max-width:500px){
+    .teaimage{
+        display : none !important;
+    }
+    .info{
+        display : block !important;
+        width:90%;
+    }
+    .infoimg{
+        display : block !important;
+        width:90% !important;
+        clear : both;
+    }
+}

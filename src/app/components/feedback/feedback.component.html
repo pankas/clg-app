@@ -1,7 +1,9 @@
 <div>
-        <div style="color:white;border-radius:3px;background-color:black;padding:4px;" > Feedbacks >> </div>
+        <div class="topnavhead" > Feedbacks >> </div>
     <br>
-    
+    <div *ngIf="feedbacks.length == 0" style="margin-top:20px">
+        <div style="margin:auto" class="loader"></div>
+    </div>
         <ul style="padding:10px;" class="list-group">
         <li *ngFor="let feedback of feedbacks" class="list-group-item">
             <b> {{feedback.heading}}</b><br>

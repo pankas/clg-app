@@ -5,6 +5,7 @@ declare let $ :any;
 @Component({
     selector : 'teacher-list',
     templateUrl : 'teacher.component.html',
+    styleUrls : ['teacher.component.css'],
     providers : [ ListService]
 })
 export class TeacherList{

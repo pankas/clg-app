@@ -1,0 +1,22 @@
+@media all and (max-width:500px){
+    .stuimage{
+        display : none !important;
+    }
+    .innerdiv2{
+        width : 90% !important;
+        margin-left : 5px !important;
+    }
+    .innerdiv1{
+        width : 90% !important;
+        margin-left : 5px !important;
+    }
+    .info{
+        display : block !important;
+        width:90%;
+    }
+    .infoimg{
+        display : block !important;
+        width:90% !important;
+        clear : both;
+    }
+}

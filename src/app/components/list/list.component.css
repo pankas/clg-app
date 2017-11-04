@@ -1,8 +1,29 @@
 .active{
-    background-color: white;
-    color:black; 
+    background-color: #3f4a52;
+    color:white !important; 
 }
 
 a{
     text-decoration : none;
 }
+
+.topnavlink{
+    display: block;
+    padding:4px;
+    color:#3f4a52;
+     border:1px solid #3f4a52;
+     border-radius:5px;
+}
+
+.topnav{
+    width:49.7%;
+    display:inline-block;
+    background-color:white;
+    color:black; 
+}
+
+@media all and (max-width:500px){
+    .topnav{
+        width : 48%;
+    }
+} 
